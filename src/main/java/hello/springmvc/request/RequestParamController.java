@@ -1,9 +1,11 @@
 package hello.springmvc.request;
 
+import hello.springmvc.basic.HelloData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -79,6 +81,14 @@ public class RequestParamController {
     //S defaultValue는 ""(빈문자)로 들어와도 default값으로 처리해줌
     public String requestParamMap(@RequestParam Map<String, Object> paramMap){
         log.info("username = {}, age = {}", paramMap.get("username"), paramMap.get("age"));
+        return "ok";
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    //S @ModelAttribute도 생략가능
+    public String modelAttributeV1(@ModelAttribute HelloData helloData){
+        log.info("username = {}, age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
 }
